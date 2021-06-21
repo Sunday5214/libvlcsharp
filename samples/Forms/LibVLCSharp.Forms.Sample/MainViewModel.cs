@@ -1,5 +1,6 @@
 ﻿using LibVLCSharp.Shared;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
 
@@ -38,6 +39,10 @@ namespace LibVLCSharp.Forms.Sample
         private void Initialize()
         {
             Core.Initialize();
+
+            List<string> argList = new List<string>();
+            argList.Add("--video-filter=transform");
+            argList.Add($"--transform-type=90");
 
             LibVLC = new LibVLC(enableDebugLogs: true);
             var media = new Media(LibVLC, new Uri("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
