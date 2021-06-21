@@ -1,8 +1,9 @@
-﻿using LibVLCSharp.Shared;
+using LibVLCSharp.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Threading.Tasks;
+using System.Collections.Generic;
 
 namespace LibVLCSharp.Forms.Sample
 {
@@ -40,25 +41,28 @@ namespace LibVLCSharp.Forms.Sample
         {
             Core.Initialize();
 
-            List<string> argList = new List<string>();
+            List<string> argList = new List<string> { "--rtsp-tcp" };
+            //argList.Add($"--rtsp-user=bdcon");
+            //argList.Add($"--rtsp-pwd=EmctCamera");
             argList.Add("--video-filter=transform");
-            argList.Add($"--transform-type=90");
+            argList.Add("--transform-type=90");
+            LibVLC = new LibVLC(argList.ToArray());
 
-            LibVLC = new LibVLC(enableDebugLogs: true);
             var media = new Media(LibVLC, new Uri("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"));
 
             MediaPlayer = new MediaPlayer(LibVLC)
             {
                 Media = media,
-                AspectRatio = "9:16",
-                Scale = 0
             };
 
+            
             media.Dispose();
         }
 
         public void OnAppearing()
         {
+            MediaPlayer.AspectRatio = "Fit screen";
+            MediaPlayer.Scale = 0;
             IsLoaded = true;
             Play();
         }

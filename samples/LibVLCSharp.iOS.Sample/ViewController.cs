@@ -1,6 +1,7 @@
 ﻿using LibVLCSharp.Platforms.iOS;
 using LibVLCSharp.Shared;
 using System;
+using System.Collections.Generic;
 using UIKit;
 
 namespace LibVLCSharp.iOS.Sample
@@ -14,8 +15,10 @@ namespace LibVLCSharp.iOS.Sample
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-
-            _libVLC = new LibVLC(enableDebugLogs: true);
+            List<string> argList = new List<string> { "--rtsp-tcp" };
+            argList.Add("--video-filter=transform");
+            argList.Add("--transform-type=90");
+            _libVLC = new LibVLC(argList.ToArray());
             _mediaPlayer = new Shared.MediaPlayer(_libVLC);
 
             _videoView = new VideoView { MediaPlayer = _mediaPlayer };
