@@ -44,7 +44,9 @@ namespace LibVLCSharp.Forms.Sample
 
             MediaPlayer = new MediaPlayer(LibVLC)
             {
-                Media = media
+                Media = media,
+                AspectRatio = "9:16",
+                Scale = 0
             };
 
             media.Dispose();
