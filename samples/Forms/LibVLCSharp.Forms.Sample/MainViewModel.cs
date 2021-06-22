@@ -61,8 +61,6 @@ namespace LibVLCSharp.Forms.Sample
 
         public void OnAppearing()
         {
-            MediaPlayer.AspectRatio = "Fit screen";
-            MediaPlayer.Scale = 0;
             IsLoaded = true;
             Play();
         }
